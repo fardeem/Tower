@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
 
-import { add } from '../../api/models/subjects.js';
+import { add, update, remove } from '../../api/models/subjects.js';
 
 
 class SubjectForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { name: '', grade: '', examtime: '' };
+  constructor({ data }) {
+    super();
+
+    this.isUpdatingForm = !! data;
+    this.state = Object.assign({
+      name: '', grade: '', examtime: '',
+    }, data, { shouldUpdate: false });
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.removeSubject = this.removeSubject.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({ name: '', grade: '', examtime: '' });
-    return add.call(this.state);
+    const { name, grade, examtime } = this.state;
+
+    if (this.isUpdatingForm) {
+      return update.call({
+        _id: this.props.data._id,
+        transaction: { name, grade, examtime },
+      });
+    }
+
+    this.setState({ shouldUpdate: false, name: '', grade: '', examtime: '' });
+    return add.call({ name, grade, examtime });
   }
 
   handleChange({ target }, field) {
     return this.setState({
+      shouldUpdate: true,
       [field]: Number(target.value) ? Number(target.value) : target.value,
     });
+  }
+
+  removeSubject() {
+    return remove.call(this.props.data._id);
   }
 
   render() {
@@ -60,43 +79,19 @@ class SubjectForm extends Component {
           />
         </label>
 
-        <input type="submit" value="create" />
+        {this.isUpdatingForm ?
+          <ul>
+            {state.shouldUpdate ? <li><input type="submit" value="update" /></li> : null}
+            <li><button onClick={this.removeSubject}>Delete</button></li>
+          </ul> :
+          <input type="submit" value="create" />}
       </form>
     );
   }
 }
 
+SubjectForm.propTypes = {
+  data: React.PropTypes.object,
+};
+
 export default SubjectForm;
-
-/* DUMPING */
-/*class SubjectCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: props.name,
-      grade: props.grade,
-    }
-  }
-
-  handleSubmit() {
-    console.log(this.state);
-  }
-
-  handleChange({ target }, field) {
-    return this.setState({ [field]: target.value });
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.name} onChange={(e) => this.handleChange(e, 'name')} />
-        <input
-          type="number"
-          value={this.state.grade}
-          onChange={(e) => this.handleChange(e, 'grade')}
-        />
-        <input type="submit" />
-      </form>
-    );
-  }
-}*/
