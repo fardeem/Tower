@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from '../api/state/store.js';
 import AppContainer from '../ui/containers/AppContainer.js';
 import SubjectsPage from '../ui/pages/SubjectsPage.js';
+import TeachersPage from '../ui/pages/TeachersPage.js';
 
 
 export const renderRoutes = () => (
@@ -12,6 +13,7 @@ export const renderRoutes = () => (
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
         <Route path="subjects" component={SubjectsPage} />
+        <Route path="teachers" component={TeachersPage} />
       </Route>
     </Router>
   </Provider>
