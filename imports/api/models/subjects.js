@@ -10,7 +10,7 @@ export const Subjects = new Mongo.Collection('subjects');
 const schema = new SimpleSchema({
   name: { type: String },
   grade: { type: Number },
-  examtime: { type: Number },
+  examtime: { type: Number, decimal: true },
 });
 
 Subjects.attachSchema(schema);
