@@ -13,20 +13,8 @@
       "plugin:meteor/recommended"
     ],
     "rules": {
-      "meteor/eventmap-params": [
-        2,
-        {
-          "templateInstanceParamName": "instance"
-        }
-      ],
-      "import/no-unresolved": [
-        2,
-        {
-          "ignore": [
-            "^meteor/"
-          ]
-        }
-      ]
+      "no-underscore-dangle": 0,
+      "import/no-unresolved": [ 2, { "ignore": [ "^meteor/" ] } ]
     }
   },
   "dependencies": {
