@@ -2,7 +2,7 @@ import React from 'react';
 
 import store from '../../api/state/store.js';
 import SubjectForm from '../components/SubjectForm.js';
-import { Subjects } from '../../api/models/subjects.js';
+import SubjectsList from '../containers/SubjectsListContainer.js';
 
 
 class SubjectsPage extends React.Component {
@@ -15,7 +15,10 @@ class SubjectsPage extends React.Component {
 
   render() {
     return (
-      <SubjectForm />
+      <div>
+        <SubjectForm />
+        <SubjectsList />
+      </div>
     );
   }
 }
