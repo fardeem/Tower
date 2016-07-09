@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const PageSearchContainer = connect(
-  null,
+  ({ pageSearch }) => ({ pageSearch }),
   mapDispatchToProps
 )(PageSearch);
 
