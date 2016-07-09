@@ -8,7 +8,7 @@ export const pageTitle = (state = '', { type, text }) => {
 };
 
 
-export const secondaryNav = (state = '', { type, text }) => {
+export const secondaryNav = (state = 'search', { type, text }) => {
   switch (type) {
     case 'CHANGE_NAV':
       return text;
