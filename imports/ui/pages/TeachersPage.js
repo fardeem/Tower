@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 
-import Timing from '../components/Timing.js';
+// import Timing from '../components/Timing.js';
+import store from '../../api/state/store.js';
+import C from '../components/SubjectPicker.js';
 
 class TeachersPage extends Component {
   constructor(props) {
@@ -10,14 +12,16 @@ class TeachersPage extends Component {
     };
   }
 
-  didStateUpdate(state) {
-    console.log(state);
+  componentDidMount() {
+    return store.dispatch({ type: 'CHANGE_TITLE', text: 'Teachers' });
   }
 
   render() {
     return (
       <div>
-        <Timing onChange={this.didStateUpdate} />
+        <form>
+          <C onChange={(v) => console.log(v)} selected={['y2eCJhkMN4HXuEkXJ']} />
+        </form>
       </div>
     );
   }
