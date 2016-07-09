@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+
+/* eslint no-param-reassign: 0 */
+/* eslint no-return-assign: 0 */
+
 class Timing extends Component {
   constructor({ data }) {
     super();
@@ -13,6 +17,16 @@ class Timing extends Component {
     }, data);
   }
 
+  componentDidMount() {
+    this._table.querySelectorAll('input')
+      .forEach((i) => {
+        i.oninvalid = (e) => e.target.setCustomValidity('dd');
+        return true;
+      });
+    // TODO: Add validation message.
+    return true;
+  }
+
   handleChange(value, day, position) {
     const stateSlice = this.state[day];
     stateSlice[position] = value;
@@ -24,7 +38,7 @@ class Timing extends Component {
     const days = ['sun', 'mon', 'tue', 'wed', 'thu'];
 
     return (
-      <table>
+      <table ref={(el) => this._table = el}>
         <thead>
           <tr>
             <th>Time Block</th>
@@ -39,6 +53,7 @@ class Timing extends Component {
               <th key={`s-${day}`}>
                 <input
                   type="text"
+                  pattern="(\d){2}:(\d){2}"
                   value={this.state[day][0]}
                   onChange={(e) => this.handleChange(e.target.value, day, 0)}
                 />
@@ -52,6 +67,7 @@ class Timing extends Component {
               <th key={`e-${day}`}>
                 <input
                   type="text"
+                  pattern="/(\d){2}:(\d){2}/"
                   value={this.state[day][1]}
                   onChange={(e) => this.handleChange(e.target.value, day, 1)}
                 />
