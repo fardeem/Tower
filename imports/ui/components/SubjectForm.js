@@ -32,10 +32,10 @@ class SubjectForm extends Component {
     }));
   }
 
-  handleChange({ target }, field) {
+  handleChange(value, field) {
     return this.setState({
       shouldUpdate: true,
-      [field]: Number(target.value) ? Number(target.value) : target.value,
+      [field]: Number(value) ? Number(value) : value,
     });
   }
 
@@ -54,7 +54,7 @@ class SubjectForm extends Component {
             type="text"
             required
             value={state.name}
-            onChange={(e) => this.handleChange(e, 'name')}
+            onChange={(e) => this.handleChange(e.target.value, 'name')}
           />
         </label>
 
@@ -66,7 +66,7 @@ class SubjectForm extends Component {
             min={5}
             max={12}
             value={state.grade}
-            onChange={(e) => this.handleChange(e, 'grade')}
+            onChange={(e) => this.handleChange(e.target.value, 'grade')}
           />
         </label>
 
@@ -76,7 +76,7 @@ class SubjectForm extends Component {
             type="number"
             required
             value={state.examtime}
-            onChange={(e) => this.handleChange(e, 'examtime')}
+            onChange={(e) => this.handleChange(e.target.value, 'examtime')}
           />
         </label>
 
