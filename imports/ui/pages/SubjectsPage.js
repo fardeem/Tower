@@ -7,10 +7,7 @@ import SubjectsList from '../containers/SubjectsListContainer.js';
 
 class SubjectsPage extends React.Component {
   componentDidMount() {
-    return [
-      store.dispatch({ type: 'CHANGE_TITLE', text: 'Subjects' }),
-      store.dispatch({ type: 'CHANGE_NAV', text: 'search' }),
-    ];
+    return store.dispatch({ type: 'CHANGE_TITLE', text: 'Subjects' });
   }
 
   render() {
