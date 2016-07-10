@@ -28,7 +28,7 @@ class SubjectForm extends Component {
     }
 
     return add.call({ name, grade, examtime }, () => this.setState({
-      shouldUpdate: false, name: '', grade: '', examtime: '',
+      name: '', grade: '', examtime: '',
     }));
   }
 
