@@ -59,12 +59,13 @@ class TeacherTiming extends Component {
         <tbody>
           <tr>
             <td>Start</td>
-            {days.map(day => (
+            {days.map((day, i) => (
               <th key={`s-${day}`}>
                 <input
                   type="text"
                   pattern="(\d){2}:(\d){2}"
                   value={this.state[day][0]}
+                  tabIndex={(2 * i) + 1}
                   onChange={(e) => this.handleChange(e.target.value, day, 0)}
                 />
               </th>)
@@ -73,12 +74,13 @@ class TeacherTiming extends Component {
 
           <tr>
             <td>End</td>
-            {days.map(day => (
+            {days.map((day, i) => (
               <th key={`e-${day}`}>
                 <input
                   type="text"
                   pattern="(\d){2}:(\d){2}"
                   value={this.state[day][1]}
+                  tabIndex={(2 * i) + 2}
                   onChange={(e) => this.handleChange(e.target.value, day, 1)}
                 />
               </th>)
