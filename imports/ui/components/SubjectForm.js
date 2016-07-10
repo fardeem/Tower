@@ -51,7 +51,7 @@ class SubjectForm extends Component {
             type="text"
             required
             value={state.name}
-            onChange={(e) => this.handleChange(e.target.value, 'name')}
+            onChange={({ target }) => this.handleChange(target.value, 'name')}
           />
         </label>
 
@@ -63,7 +63,7 @@ class SubjectForm extends Component {
             min={5}
             max={12}
             value={state.grade}
-            onChange={(e) => this.handleChange(Number(e.target.value), 'grade')}
+            onChange={({ target }) => this.handleChange(Number(target.value), 'grade')}
           />
         </label>
 
@@ -73,7 +73,7 @@ class SubjectForm extends Component {
             type="number"
             required
             value={state.examtime}
-            onChange={(e) => this.handleChange(Number(e.target.value), 'examtime')}
+            onChange={({ target }) => this.handleChange(Number(target.value), 'examtime')}
           />
         </label>
 
