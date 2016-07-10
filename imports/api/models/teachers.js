@@ -49,6 +49,10 @@ export const add = new ValidatedMethod({
   name: 'teachers.add',
   validate: schema.validator(),
   run(doc) {
+    if (! doc.parttime) {
+      delete doc.timing;
+    }
+
     return Teachers.insert(doc);
   },
 });
