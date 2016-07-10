@@ -47,7 +47,7 @@ class TeacherForm extends Component {
         <label>
           <span>Subjects</span>
           <SubjectPicker
-            selected={state.subjects}
+            value={state.subjects}
             onChange={(v) => this.handleChange(v, 'subjects')}
           />
         </label>

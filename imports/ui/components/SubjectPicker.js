@@ -28,7 +28,7 @@ SubjectPicker.propTypes = {
 };
 
 
-export default createContainer(({ selected = [], onChange }) => {
+export default createContainer(({ value = [], onChange }) => {
   const mapToProps = ({ _id, name, grade }) => ({
     value: _id,
     label: `Gr. ${grade} — ${name}`,
@@ -38,7 +38,7 @@ export default createContainer(({ selected = [], onChange }) => {
 
   return {
     options: Subjects.find({}, options).map(mapToProps),
-    value: Subjects.find({ _id: { $in: selected } }, options).map(mapToProps),
+    value: Subjects.find({ _id: { $in: value } }, options).map(mapToProps),
     onChange,
   };
 }, SubjectPicker);
