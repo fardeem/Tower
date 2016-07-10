@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 /* eslint no-param-reassign: 0 */
 /* eslint no-return-assign: 0 */
 
-class Timing extends Component {
+class TeacherTiming extends Component {
   constructor({ data }) {
     super();
 
@@ -80,9 +80,9 @@ class Timing extends Component {
   }
 }
 
-Timing.propTypes = {
+TeacherTiming.propTypes = {
   data: React.PropTypes.object,
   onChange: React.PropTypes.func,
 };
 
-export default Timing;
+export default TeacherTiming;
