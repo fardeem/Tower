@@ -37,10 +37,7 @@ export const update = new ValidatedMethod({
   name: 'subjects.update',
   validate: new SimpleSchema({
     _id: { type: String, regEx: SimpleSchema.RegEx.Id },
-    transaction: { type: Object },
-    'transaction.name': { type: String, optional: true },
-    'transaction.grade': { type: Number, optional: true },
-    'transaction.examtime': { type: Number, optional: true },
+    transaction: { type: schema },
   }).validator(),
   run({ _id, transaction }) {
     return Subjects.update({ _id }, { $set: transaction });
