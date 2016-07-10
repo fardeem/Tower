@@ -27,10 +27,11 @@ class TeacherForm extends Component {
     const { name, subjects, parttime, timing } = this.state;
 
     if (this.isUpdatingForm) {
+      this.setState({ shouldUpdate: false });
       return update.call({
         _id: this.props.data._id,
         transaction: { name, subjects, parttime, timing },
-      }, () => this.setState({ shouldUpdate: false }));
+      });
     }
 
     return add.call({ name, subjects, parttime, timing }, () => this.setState({

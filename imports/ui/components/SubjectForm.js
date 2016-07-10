@@ -21,10 +21,11 @@ class SubjectForm extends Component {
     const { name, grade, examtime } = this.state;
 
     if (this.isUpdatingForm) {
+      this.setState({ shouldUpdate: false });
       return update.call({
         _id: this.props.data._id,
         transaction: { name, grade, examtime },
-      }, () => this.setState({ shouldUpdate: false }));
+      });
     }
 
     return add.call({ name, grade, examtime }, () => this.setState({
