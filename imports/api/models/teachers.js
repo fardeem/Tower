@@ -45,32 +45,38 @@ if (Meteor.isServer) {
 
 /* Methods */
 
+function formatDoc({ name, subjects, parttime, timing }) {
+  const doc = { name, subjects, parttime };
+  if (parttime) {
+    doc.timing = timing;
+  }
+  return doc;
+}
+
 export const add = new ValidatedMethod({
   name: 'teachers.add',
   validate: schema.validator(),
   run(doc) {
-    if (! doc.parttime) {
-      delete doc.timing;
-    }
-
-    return Teachers.insert(doc);
+    return Teachers.insert(formatDoc(doc));
   },
 });
 
 
-// export const update = new ValidatedMethod({
-//   name: 'subjects.update',
-//   validate: new SimpleSchema({
-//     _id: { type: String, regEx: SimpleSchema.RegEx.Id },
-//     transaction: { type: Object },
-//     'transaction.name': { type: String, optional: true },
-//     'transaction.grade': { type: Number, optional: true },
-//     'transaction.examtime': { type: Number, optional: true },
-//   }).validator(),
-//   run({ _id, transaction }) {
-//     return Subjects.update({ _id }, { $set: transaction });
-//   },
-// });
+export const update = new ValidatedMethod({
+  name: 'teachers.update',
+  validate: new SimpleSchema({
+    _id: { type: String, regEx: SimpleSchema.RegEx.Id },
+    transaction: { type: schema },
+  }).validator(),
+  run({ _id, transaction }) {
+    const modifier = { $set: formatDoc(transaction) };
+    if (! transaction.parttime) {
+      modifier.$unset = { timing: '' };
+    }
+
+    return Teachers.update({ _id }, modifier);
+  },
+});
 
 
 export const remove = new ValidatedMethod({
