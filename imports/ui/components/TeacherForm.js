@@ -1,33 +1,56 @@
 import React, { Component } from 'react';
 
-import { add } from '../../api/models/teachers.js';
+import { add, update } from '../../api/models/teachers.js';
 import SubjectPicker from './SubjectPicker.js';
 import TeacherTiming from './TeacherTiming.js';
 
 
 class TeacherForm extends Component {
-  constructor() {
+  constructor({ data }) {
     super();
 
-    this.state = {
-      name: '',
-      subjects: [],
-      parttime: false,
-      timing: {},
-    };
+    this.isUpdatingForm = !! data;
+    this.state = Object.assign({
+      name: '', subjects: [], parttime: false, timing: {},
+    }, data, { shouldUpdate: false });
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(value, field) {
-    this.setState({ [field]: value });
+    this.setState({ shouldUpdate: true, [field]: value });
   }
+
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   const { name, grade, examtime } = this.state;
+
+  //   if (this.isUpdatingForm) {
+  //     return update.call({
+  //       _id: this.props.data._id,
+  //       transaction: { name, grade, examtime },
+  //     }, () => this.setState({ shouldUpdate: false }));
+  //   }
+
+  //   return add.call({ name, grade, examtime }, () => this.setState({
+  //     shouldUpdate: false, name: '', grade: '', examtime: '',
+  //   }));
+  // }
 
   handleSubmit(e) {
     e.preventDefault();
-    add.call(this.state, () => (
-      this.setState({ name: '', subjects: [], parttime: false, timing: {} })
-    ));
+    const { name, subjects, parttime, timing } = this.state;
+
+    if (this.isUpdatingForm) {
+      return update.call({
+        _id: this.props.data._id,
+        transaction: { name, subjects, parttime, timing },
+      }, () => this.setState({ shouldUpdate: false }));
+    }
+
+    return add.call({ name, subjects, parttime, timing }, () => this.setState({
+      name: '', subjects: [], parttime: false, timing: {},
+    }));
   }
 
   render() {
@@ -70,10 +93,19 @@ class TeacherForm extends Component {
             onChange={(v) => this.handleChange(v, 'timing')}
           /> : null}
 
-        <input type="submit" />
+        {this.isUpdatingForm ?
+          <ul>
+            {state.shouldUpdate ? <li><input type="submit" value="update" /></li> : null}
+            <li><button onClick={this.removeSubject}>Delete</button></li>
+          </ul> :
+          <input type="submit" value="create" />}
       </form>
     );
   }
 }
+
+TeacherForm.propTypes = {
+  data: React.PropTypes.object,
+};
 
 export default TeacherForm;
