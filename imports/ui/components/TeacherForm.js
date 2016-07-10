@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { add, update } from '../../api/models/teachers.js';
+import { add, update, remove } from '../../api/models/teachers.js';
 import SubjectPicker from './SubjectPicker.js';
 import TeacherTiming from './TeacherTiming.js';
 
@@ -15,27 +15,12 @@ class TeacherForm extends Component {
     }, data, { shouldUpdate: false });
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.removeTeacher = this.removeTeacher.bind(this);
   }
 
   handleChange(value, field) {
     this.setState({ shouldUpdate: true, [field]: value });
   }
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   const { name, grade, examtime } = this.state;
-
-  //   if (this.isUpdatingForm) {
-  //     return update.call({
-  //       _id: this.props.data._id,
-  //       transaction: { name, grade, examtime },
-  //     }, () => this.setState({ shouldUpdate: false }));
-  //   }
-
-  //   return add.call({ name, grade, examtime }, () => this.setState({
-  //     shouldUpdate: false, name: '', grade: '', examtime: '',
-  //   }));
-  // }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -51,6 +36,10 @@ class TeacherForm extends Component {
     return add.call({ name, subjects, parttime, timing }, () => this.setState({
       name: '', subjects: [], parttime: false, timing: {},
     }));
+  }
+
+  removeTeacher() {
+    return remove.call(this.props.data._id);
   }
 
   render() {
@@ -96,7 +85,7 @@ class TeacherForm extends Component {
         {this.isUpdatingForm ?
           <ul>
             {state.shouldUpdate ? <li><input type="submit" value="update" /></li> : null}
-            <li><button onClick={this.removeSubject}>Delete</button></li>
+            <li><button onClick={this.removeTeacher}>Delete</button></li>
           </ul> :
           <input type="submit" value="create" />}
       </form>
