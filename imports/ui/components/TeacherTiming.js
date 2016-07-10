@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isEqual } from 'lodash';
 
 
 /* eslint no-param-reassign: 0 */
@@ -30,8 +31,17 @@ class TeacherTiming extends Component {
   handleChange(value, day, position) {
     const stateSlice = this.state[day];
     stateSlice[position] = value;
-    this.setState({ [day]: stateSlice });
-    return this.props.onChange(this.state);
+    return this.setState({ [day]: stateSlice }, () => {
+      const state = Object.assign({}, this.state);
+
+      Object.keys(state).forEach(item => {
+        if (isEqual(state[item], ['', ''])) {
+          delete state[item];
+        }
+      });
+
+      return this.props.onChange(state);
+    });
   }
 
   render() {
@@ -67,7 +77,7 @@ class TeacherTiming extends Component {
               <th key={`e-${day}`}>
                 <input
                   type="text"
-                  pattern="/(\d){2}:(\d){2}/"
+                  pattern="(\d){2}:(\d){2}"
                   value={this.state[day][1]}
                   onChange={(e) => this.handleChange(e.target.value, day, 1)}
                 />

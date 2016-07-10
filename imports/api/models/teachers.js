@@ -5,7 +5,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { check } from 'meteor/check';
 
 
-export const Teachers = new Mongo.Collection('subjects');
+export const Teachers = new Mongo.Collection('teachers');
 
 const timingSchema = new SimpleSchema((() => {
   const _schema = {};
@@ -14,7 +14,8 @@ const timingSchema = new SimpleSchema((() => {
       type: [String],
       minCount: 2,
       maxCount: 2,
-      regEx: /(^$)|(\d){2}:(\d){2}/,
+      optional: true,
+      regEx: /(\d){2}:(\d){2}/,
     };
   });
 
