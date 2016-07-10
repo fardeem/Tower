@@ -33,10 +33,7 @@ class SubjectForm extends Component {
   }
 
   handleChange(value, field) {
-    return this.setState({
-      shouldUpdate: true,
-      [field]: Number(value) ? Number(value) : value,
-    });
+    return this.setState({ shouldUpdate: true, [field]: value });
   }
 
   removeSubject() {
@@ -66,7 +63,7 @@ class SubjectForm extends Component {
             min={5}
             max={12}
             value={state.grade}
-            onChange={(e) => this.handleChange(e.target.value, 'grade')}
+            onChange={(e) => this.handleChange(Number(e.target.value), 'grade')}
           />
         </label>
 
@@ -76,7 +73,7 @@ class SubjectForm extends Component {
             type="number"
             required
             value={state.examtime}
-            onChange={(e) => this.handleChange(e.target.value, 'examtime')}
+            onChange={(e) => this.handleChange(Number(e.target.value), 'examtime')}
           />
         </label>
 
