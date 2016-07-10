@@ -7,7 +7,10 @@ import { Subjects } from '../../api/models/subjects.js';
 
 const SubjectPicker = ({ value, options, onChange }) => {
   function formatChange(data) {
-    return onChange(data.map(item => item.value));
+    if (data) {
+      return onChange(data.map(item => item.value));
+    }
+    return onChange([]);
   }
 
   return (
