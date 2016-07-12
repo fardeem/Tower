@@ -102,7 +102,7 @@ const ExamFactory = (subjects = []) => {
     let sessions = [];
     let day = 0;
     const mapIdToDocument = (subjectId) => ({
-      _id: Random.id(), examId, subjectId, day, room: '' });
+      _id: Random.id(), examId, subjectId, day, room: [] });
 
     for (; day <= days; day++) {
       sessions =
