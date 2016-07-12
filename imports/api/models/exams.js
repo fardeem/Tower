@@ -78,12 +78,13 @@ const ExamFactory = (subjects = []) => {
   const getSessions = () => {
     let sessions = [];
     let day = 0;
-    const formatDoc = (subjectId) => ({ examId, subjectId, day, room: '' });
+    const mapIdToDocument = (subjectId) => ({
+      _id: Random.id(), examId, subjectId, day, room: '' });
 
     for (; day <= days; day++) {
       sessions =
         getSessionsForDay(day)
-        .map(formatDoc)
+        .map(mapIdToDocument)
         .concat(sessions);
     }
 
