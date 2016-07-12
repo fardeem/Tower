@@ -15,7 +15,7 @@ const timingSchema = new SimpleSchema((() => {
       minCount: 2,
       maxCount: 2,
       optional: true,
-      regEx: /(\d){2}:(\d){2}/,
+      regEx: /^(\d){2}:(\d){2}$/,
     };
   });
 
