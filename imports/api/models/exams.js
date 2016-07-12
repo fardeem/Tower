@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
@@ -6,9 +8,10 @@ import { Random } from 'meteor/random';
 import { groupBy } from 'lodash';
 
 import { Subjects } from './subjects.js';
+import { Sessions } from './sessions.js';
+
 
 export const Exams = new Mongo.Collection('exams');
-const Sessions = new Mongo.Collection('sessions');
 
 const schema = new SimpleSchema({
   name: { type: String },
