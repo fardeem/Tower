@@ -25,6 +25,17 @@ const schema = new SimpleSchema({
 Exams.attachSchema(schema);
 
 
+/* Publication */
+if (Meteor.isServer) {
+  Meteor.publish('exams', (_id) => {
+    check(_id, String);
+    return [
+      Exams.find({ _id }),
+      Sessions.find({ examId: _id }),
+    ];
+  });
+}
+
 /* Utils */
 
 
