@@ -122,3 +122,29 @@ const ExamFactory = (subjects = []) => {
     sessions: getSessions(),
   };
 };
+
+
+/* Methods */
+
+export const add = new ValidatedMethod({
+  name: 'exams.add',
+  validate: schema.pick([
+    'name', 'date', 'time', 'subjects', 'subjects.$',
+  ]).validator(),
+  run({ name, date, time, subjects }) {
+    const { examId, grades, days, sessions } = new ExamFactory(
+      Subjects.find({ _id: { $in: subjects } }).fetch()
+    );
+
+    return Exams.insert({
+      _id: examId, name, date, time, subjects, grades, days,
+    }, (err, res) => {
+      if (! this.isSimulation) {
+        return Sessions.rawCollection().insert(sessions, () => res);
+      }
+
+      return res;
+    });
+  },
+});
+
