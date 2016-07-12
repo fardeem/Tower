@@ -6,11 +6,8 @@ import Header from './containers/HeaderContainer.js';
 const App = ({ children }) => (
   <main>
     <Header />
-
     <div className="page-wrap">
-      <div className="container">
-        {children}
-      </div>
+      {children}
     </div>
   </main>
 );

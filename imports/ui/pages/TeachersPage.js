@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 // import Timing from '../components/Timing.js';
 import store from '../../api/state/store.js';
-import C from '../components/SubjectPicker.js';
+import TeacherForm from '../components/TeacherForm.js';
+import TeachersList from '../containers/TeachersListContainer.js';
 
 class TeachersPage extends Component {
   constructor(props) {
@@ -18,10 +19,9 @@ class TeachersPage extends Component {
 
   render() {
     return (
-      <div>
-        <form>
-          <C onChange={(v) => console.log(v)} selected={['y2eCJhkMN4HXuEkXJ']} />
-        </form>
+      <div className="container">
+        <TeacherForm />
+        <TeachersList />
       </div>
     );
   }

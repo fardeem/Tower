@@ -12,7 +12,7 @@ class SubjectsPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <SubjectForm />
         <SubjectsList />
       </div>
