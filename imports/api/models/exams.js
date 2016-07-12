@@ -1,5 +1,28 @@
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
+
 import { Random } from 'meteor/random';
 import { groupBy } from 'lodash';
+
+import { Subjects } from './subjects.js';
+
+export const Exams = new Mongo.Collection('exams');
+const Sessions = new Mongo.Collection('sessions');
+
+const schema = new SimpleSchema({
+  name: { type: String },
+  date: { type: Date },
+  time: { type: String, regEx: /^(\d){2}:(\d){2}$/ },
+  subjects: { type: [String], regEx: SimpleSchema.RegEx.Id },
+  grades: { type: [Number] },
+  days: { type: Number },
+});
+
+Exams.attachSchema(schema);
+
+
+/* Utils */
 
 
 /**
