@@ -1,6 +1,9 @@
 import React from 'react';
 import { range } from 'lodash';
 
+import { Exams } from '../../api/models/exams.js';
+import { createContainer } from 'meteor/react-meteor-data';
+
 
 const Routine = ({ days = 0, grades = [] }) => (
   <div className="rountine">
@@ -29,4 +32,4 @@ Routine.propTypes = {
   grades: React.PropTypes.array,
 };
 
-export default Routine;
+export default createContainer(() => Exams.findOne({}) || {}, Routine);
