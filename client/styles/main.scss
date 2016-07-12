@@ -4,6 +4,22 @@
   display: none;
 }
 
+.header {
+  padding: 1em 0;
+  background: #eee;
+  .container {
+    display: flex;
+  }
+  div {
+    flex: 1;
+  }
+}
+
+.day {
+  display: flex;
+  p { flex: 1; }
+}
+
 .container {
   width: 90%;
   margin: 0 auto;  
