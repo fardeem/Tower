@@ -6,7 +6,7 @@ import store from '../api/state/store.js';
 import AppContainer from '../ui/containers/AppContainer.js';
 import SubjectsPage from '../ui/pages/SubjectsPage.js';
 import TeachersPage from '../ui/pages/TeachersPage.js';
-import RoutinePage from '../ui/pages/RoutinePage.js';
+import RoutinePage from '../ui/containers/RoutinePageContainer.js';
 
 
 function clearState() {
