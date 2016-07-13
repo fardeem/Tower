@@ -1,12 +1,17 @@
 import { createStore, combineReducers } from 'redux';
 
-import { pageTitle, secondaryNav, pageSearch } from './reducer.js';
+import {
+  pageTitle,
+  secondaryNav,
+  pageSearch,
+  examsPageSettings } from './reducer.js';
 
 
 const rootReducers = combineReducers({
   pageTitle,
   secondaryNav,
   pageSearch,
+  examsPageSettings,
 });
 
 const store = createStore(rootReducers, {},

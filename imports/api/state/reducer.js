@@ -26,3 +26,13 @@ export const pageSearch = (state = '', { type, text }) => {
       return state;
   }
 };
+
+
+export const examsPageSettings = (state = {}, { type, payload }) => {
+  switch (type) {
+    case 'CHANGE_EXAM_ID':
+      return Object.assign({}, state, { id: payload.id });
+    default:
+      return state;
+  }
+};
