@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const PageSearch = ({ pageSearch, handleChange }) => (
+const NavSearch = ({ pageSearch, handleChange }) => (
   <div className="search">
     <span>icon</span>
     <input
@@ -13,9 +13,9 @@ const PageSearch = ({ pageSearch, handleChange }) => (
   </div>
 );
 
-PageSearch.propTypes = {
+NavSearch.propTypes = {
   pageSearch: React.PropTypes.string,
   handleChange: React.PropTypes.func,
 };
 
-export default PageSearch;
+export default NavSearch;

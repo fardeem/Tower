@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import PageSearch from '../components/PageSearch.js';
+import NavSearch from '../components/NavSearch.js';
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -9,9 +9,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const PageSearchContainer = connect(
+const NavSearchContainer = connect(
   ({ pageSearch }) => ({ pageSearch }),
   mapDispatchToProps
-)(PageSearch);
+)(NavSearch);
 
-export default PageSearchContainer;
+export default NavSearchContainer;

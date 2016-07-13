@@ -2,15 +2,15 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
-const ExamNav = ({ id }) => (
+const NavExam = ({ id }) => (
   <nav>
     <Link to={`/exams/${id}`}>Routine</Link>
     <Link to={`/exams/${id}/rooms`}>Rooms</Link>
   </nav>
 );
 
-ExamNav.propTypes = {
+NavExam.propTypes = {
   id: React.PropTypes.string,
 };
 
-export default ExamNav;
+export default NavExam;
