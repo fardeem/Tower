@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import PageSearch from '../containers/PageSearchContainer.js';
+import ExamNav from '../containers/ExamNavContainer.js';
 
 
 const Header = ({ pageTitle, secondaryNav }) => (
@@ -19,7 +20,14 @@ const Header = ({ pageTitle, secondaryNav }) => (
 
       <h3 className="page-title">{pageTitle}</h3>
 
-      {secondaryNav === 'search' ? <PageSearch /> : false}
+      {(() => {
+        switch (secondaryNav) {
+          case 'exam-nav':
+            return <ExamNav />;
+          default:
+            return <PageSearch />;
+        }
+      })()}
     </div>
   </div>
 );
