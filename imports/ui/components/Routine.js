@@ -4,18 +4,19 @@ import { range } from 'lodash';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
+import { incrementDay } from '../../api/models/exams.js';
 import SessionsList from '../containers/SessionsListContainer.js';
 
 
-function formatDate(date = new Date(), dayIndex) {
-  let instance = moment(date).add(dayIndex, 'd');
+function formatDate(date, daysToAdd) {
+  let i = 0;
+  const instance = moment(date);
 
-  if (instance.format('d') === '5') {
-    // skip friday
-    instance = instance.add(2, 'd');
-  } else if (instance.format('d') === '6') {
-    // Skip saturday
-    instance = instance.add(1, 'd');
+  while (i < daysToAdd) {
+    instance.add(1, 'd');
+    if (instance.day() !== 5 && instance.day() !== 6) {
+      i++;
+    }
   }
 
   return {
