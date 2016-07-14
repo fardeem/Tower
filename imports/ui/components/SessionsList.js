@@ -4,6 +4,8 @@ import React from 'react';
 import moment from 'moment';
 import { DragSource, DropTarget } from 'react-dnd';
 
+import { updateDay } from '../../api/models/sessions.js';
+
 
 const Session = ({ name, examtime, room, startTime, endTime, connectDragSource }) => (
   connectDragSource(
@@ -25,8 +27,8 @@ Session.propTypes = {
 };
 
 const DragSession = DragSource('SESSION', {
-  beginDrag({ _id, grade }) {
-    return { _id, grade };
+  beginDrag({ sessionId, grade }) {
+    return { _id: sessionId, grade };
   },
 }, (connect) => ({ connectDragSource: connect.dragSource() }))(Session);
 
@@ -64,9 +66,10 @@ SessionsList.propTypes = {
 
 const DragSessionsList = DropTarget('SESSION', {
   drop(props, monitor) {
-    const { _id, grade } = monitor.getItem();
+    const { _id } = monitor.getItem();
     const { day } = props;
-    console.log(`Session with id: ${_id} of grade ${grade} being dragged to ${day}`);
+    updateDay.call({ _id, day });
+    return {};
   },
 
   canDrop(props, monitor) {
