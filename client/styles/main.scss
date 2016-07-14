@@ -20,6 +20,16 @@
   p { flex: 1; }
 }
 
+time {
+  flex: 1;
+}
+
+.sessions-list {
+  flex: 1;
+  border: 1px solid #555;
+  padding: 1em;
+}
+
 .container {
   width: 90%;
   margin: 0 auto;  
