@@ -1,5 +1,4 @@
 import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
@@ -14,6 +13,9 @@ const schema = new SimpleSchema({
 });
 
 Sessions.attachSchema(schema);
+
+
+/* Methods */
 
 export const updateDay = new ValidatedMethod({
   name: 'sessions.updateDay',
