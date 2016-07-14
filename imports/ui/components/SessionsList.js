@@ -14,11 +14,11 @@ const Session = ({ name, examtime, room, startTime, endTime }) => (
 );
 
 Session.propTypes = {
-  name: React.PropTypes.string,
-  examtime: React.PropTypes.number,
-  room: React.PropTypes.array,
-  startTime: React.PropTypes.string,
-  endTime: React.PropTypes.string,
+  name: React.PropTypes.string.isRequired,
+  examtime: React.PropTypes.number.isRequired,
+  room: React.PropTypes.array.isRequired,
+  startTime: React.PropTypes.string.isRequired,
+  endTime: React.PropTypes.string.isRequired,
 };
 
 
@@ -41,7 +41,7 @@ const SessionsList = ({ subjects, startTime }) => {
           {...data}
           key={data._id}
           startTime={time}
-          endtime={updateTime(data.examtime)}
+          endTime={updateTime(data.examtime)}
         />
       ))}
     </div>
@@ -49,8 +49,8 @@ const SessionsList = ({ subjects, startTime }) => {
 };
 
 SessionsList.propTypes = {
-  subjects: React.PropTypes.array,
-  startTime: React.PropTypes.string,
+  subjects: React.PropTypes.array.isRequired,
+  startTime: React.PropTypes.string.isRequired,
 };
 
 export default SessionsList;

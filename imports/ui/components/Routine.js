@@ -25,7 +25,7 @@ function formatDate(date = new Date(), dayIndex) {
 }
 
 
-const Routine = ({ days = 0, grades, date, time }) => (
+const Routine = ({ days = 0, grades = [], date, time }) => (
   <div className="rountine">
     <div className="header">
       <div className="container">
@@ -48,7 +48,7 @@ const Routine = ({ days = 0, grades, date, time }) => (
             <SessionsList
               day={day}
               grade={grade}
-              starttime={time}
+              startTime={time}
               key={`${day}/${grade}`}
             />
           ))}
