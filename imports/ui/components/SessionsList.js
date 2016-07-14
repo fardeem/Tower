@@ -2,15 +2,18 @@
 
 import React from 'react';
 import moment from 'moment';
+import { DragSource, DropTarget } from 'react-dnd';
 
 
-const Session = ({ name, examtime, room, startTime, endTime }) => (
-  <div className="session">
-    <hr style={{ width: `${examtime * 10}%` }} />
-    <p>{name}</p>
-    <p>{startTime} - {endTime}</p>
-    {room.length ? <p>Rooms: {room.join(', ')}</p> : null}
-  </div>
+const Session = ({ name, examtime, room, startTime, endTime, connectDragSource }) => (
+  connectDragSource(
+    <div className="session">
+      <hr style={{ width: `${examtime * 10}%` }} />
+      <p>{name}</p>
+      <p>{startTime} - {endTime}</p>
+      {room.length ? <p>Rooms: {room.join(', ')}</p> : null}
+    </div>
+  )
 );
 
 Session.propTypes = {
@@ -21,8 +24,14 @@ Session.propTypes = {
   endTime: React.PropTypes.string.isRequired,
 };
 
+const DragSession = DragSource('SESSION', {
+  beginDrag({ _id, grade }) {
+    return { _id, grade };
+  },
+}, (connect) => ({ connectDragSource: connect.dragSource() }))(Session);
 
-const SessionsList = ({ subjects, startTime }) => {
+
+const SessionsList = ({ subjects, startTime, connectDropTarget }) => {
   let time = startTime;
 
   function updateTime(interval) {
@@ -34,10 +43,10 @@ const SessionsList = ({ subjects, startTime }) => {
     return endtime;
   }
 
-  return (
+  return connectDropTarget(
     <div className="sessions-list">
       {subjects.map((data) => (
-        <Session
+        <DragSession
           {...data}
           key={data._id}
           startTime={time}
@@ -53,4 +62,16 @@ SessionsList.propTypes = {
   startTime: React.PropTypes.string.isRequired,
 };
 
-export default SessionsList;
+const DragSessionsList = DropTarget('SESSION', {
+  drop(props, monitor) {
+    const { _id, grade } = monitor.getItem();
+    const { day } = props;
+    console.log(`Session with id: ${_id} of grade ${grade} being dragged to ${day}`);
+  },
+
+  canDrop(props, monitor) {
+    return props.grade === monitor.getItem().grade;
+  },
+}, (connect) => ({ connectDropTarget: connect.dropTarget() }))(SessionsList);
+
+export default DragSessionsList;
