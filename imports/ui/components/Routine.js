@@ -65,4 +65,4 @@ Routine.propTypes = {
   grades: React.PropTypes.array,
 };
 
-export default createContainer(() => Exams.findOne({}) || {}, Routine);
+export default Routine;

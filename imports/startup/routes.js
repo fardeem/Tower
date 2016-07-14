@@ -9,7 +9,7 @@ import SubjectsPage from '../ui/pages/SubjectsPage.js';
 import TeachersPage from '../ui/pages/TeachersPage.js';
 import ExamsPage from '../ui/containers/ExamsPageContainer.js';
 
-import Routine from '../ui/components/Routine.js';
+import Routine from '../ui/containers/RoutineContainer.js';
 
 
 const Rooms = () => (
