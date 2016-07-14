@@ -28,7 +28,11 @@ function formatDate(date = new Date(), dayIndex) {
 class Routine extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    incrementDay.call({ _id: this.props._id });
   }
 
   render() {
@@ -64,12 +68,15 @@ class Routine extends React.Component {
             </div>
           ))}
         </div>
+
+        <button onClick={this.handleClick}>Add day</button>
       </div>
     );
   }
 }
 
 Routine.propTypes = {
+  _id: React.PropTypes.string,
   date: React.PropTypes.object,
   time: React.PropTypes.string,
   days: React.PropTypes.number,

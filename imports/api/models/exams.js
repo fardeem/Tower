@@ -146,7 +146,7 @@ export const add = new ValidatedMethod({
     'name', 'date', 'time', 'subjects', 'subjects.$',
   ]).validator(),
   run({ name, date, time, subjects }) {
-    const { examId, grades, days, sessions } = new ExamFactory(
+    const { examId, grades, days, sessions } = ExamFactory(
       Subjects.find({ _id: { $in: subjects } }).fetch()
     );
 
@@ -162,3 +162,13 @@ export const add = new ValidatedMethod({
   },
 });
 
+
+export const incrementDay = new ValidatedMethod({
+  name: 'exams.incrementDay',
+  validate: new SimpleSchema({
+    _id: { type: String, regEx: SimpleSchema.RegEx.Id },
+  }).validator(),
+  run({ _id }) {
+    return Exams.update({ _id }, { $inc: { days: 1 } });
+  },
+});
