@@ -44,7 +44,8 @@ export const add = new ValidatedMethod({
   ]).validator(),
   run({ name, date, time, subjects }) {
     const { examId, grades, days, sessions } = ExamFactory(
-      Subjects.find({ _id: { $in: subjects } }).fetch()
+      Subjects.find({ _id: { $in: subjects } }).fetch(),
+      time
     );
 
     return Exams.insert({
