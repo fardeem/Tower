@@ -30,9 +30,11 @@ export const updateDay = new ValidatedMethod({
     startTime: { type: String },
   }).validator(),
   run({ _id, day, startTime }) {
-    const session = Sessions.findOne({ _id });
-    const subject = Subjects.findOne({ _id: session.subjectId });
-    const endTime = moment(startTime, 'HH:mm').add(subject.examtime, 'h').format('HH:mm');
+    const { subjectId } = Sessions.findOne({ _id });
+    const { examtime } = Subjects.findOne({ _id: subjectId });
+    const endTime = moment(startTime, 'HH:mm')
+      .add(examtime, 'h')
+      .format('HH:mm');
 
     return Sessions.update({ _id }, { $set: { day, startTime, endTime } });
   },
