@@ -29,15 +29,21 @@ class SessionsList extends Component {
 
 SessionsList.propTypes = {
   subjects: React.PropTypes.array.isRequired,
-  startTime: React.PropTypes.string.isRequired,
+  examStartTime: React.PropTypes.string.isRequired,
   connectDropTarget: React.PropTypes.func,
 };
 
 export default DropTarget('SESSION', {
   drop(props, monitor) {
     const { _id } = monitor.getItem();
-    const { day } = props;
-    updateDay.call({ _id, day });
+    const { day, subjects, examStartTime } = props;
+
+    const lastSubject = subjects[subjects.length - 1];
+    const startTime = lastSubject ? moment(
+      lastSubject.endTime, 'HH:mm'
+    ).add(0.5, 'h').format('HH:mm') : examStartTime;
+
+    updateDay.call({ _id, day, startTime });
     return {};
   },
 
