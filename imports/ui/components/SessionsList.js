@@ -9,22 +9,8 @@ import { updateDay } from '../../api/models/sessions.js';
 
 
 class SessionsList extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
-    const { subjects, startTime, connectDropTarget } = this.props;
-    let time = startTime;
-
-    function updateTime(interval) {
-      const endtime = moment(time, 'hh:mm')
-        .add(interval, 'h')
-        .format('hh:mm');
-
-      time = moment(endtime, 'hh:mm').add(0.5, 'h').format('hh:mm');
-      return endtime;
-    }
+    const { subjects, connectDropTarget } = this.props;
 
     return connectDropTarget(
       <div className="sessions-list">
@@ -34,8 +20,6 @@ class SessionsList extends Component {
           <SessionCard
             {...data}
             key={data._id}
-            startTime={time}
-            endTime={updateTime(data.examtime)}
           />
         ))}
       </div>

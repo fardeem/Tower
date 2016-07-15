@@ -62,7 +62,7 @@ class Routine extends React.Component {
                 <SessionsList
                   day={day}
                   grade={grade}
-                  startTime={time}
+                  examStartTime={time}
                   key={`${day}/${grade}`}
                 />
               ))}
