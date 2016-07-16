@@ -7,12 +7,14 @@ import SessionsList from '../components/SessionsList.js';
 
 const SessionsListContainer = createContainer(({ day, grade, examStartTime }) => {
   const mapSessionToSubject = (data) => {
-    const { _id, subjectId, room, startTime, endTime } = data;
+    const session = data;
+    session.sessionId = data._id;
+    delete session._id;
 
     return Object.assign(
       {},
-      Subjects.findOne({ _id: subjectId, grade }),
-      { sessionId: _id, room, startTime, endTime }
+      Subjects.findOne({ _id: data.subjectId, grade }),
+      session
     );
   };
 
