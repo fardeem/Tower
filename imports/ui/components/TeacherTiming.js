@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { isEqual } from 'lodash';
 
 
-/* eslint no-param-reassign: 0 */
-/* eslint no-return-assign: 0 */
-
 class TeacherTiming extends Component {
   constructor({ data }) {
     super();
@@ -19,6 +16,7 @@ class TeacherTiming extends Component {
   }
 
   componentDidMount() {
+    /* eslint no-param-reassign: 0 */
     this._table.querySelectorAll('input')
       .forEach((i) => {
         i.oninvalid = (e) => e.target.setCustomValidity('dd');
@@ -48,7 +46,7 @@ class TeacherTiming extends Component {
     const days = ['sun', 'mon', 'tue', 'wed', 'thu'];
 
     return (
-      <table ref={(el) => this._table = el}>
+      <table ref={(el) => (this._table = el)}>
         <thead>
           <tr>
             <th>Time Block</th>
