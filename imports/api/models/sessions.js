@@ -39,3 +39,15 @@ export const updateDay = new ValidatedMethod({
     return Sessions.update({ _id }, { $set: { day, startTime, endTime } });
   },
 });
+
+
+export const updateRoom = new ValidatedMethod({
+  name: 'sessions.updateRoom',
+  validate: new SimpleSchema({
+    _id: { type: String, regEx: SimpleSchema.RegEx.Id },
+    value: { type: [String] },
+  }).validator(),
+  run({ _id, value }) {
+    return Sessions.update({ _id }, { $set: { room: value } });
+  },
+});
