@@ -7,6 +7,22 @@ class Modal extends Component {
 
     this.state = { open: false };
     this.close = this.close.bind(this);
+
+    this.event = (e) => {
+      if (this.state.open && e.keyCode === 27) {
+        return this.close();
+      }
+
+      return false;
+    };
+  }
+
+  componentDidMount() {
+    document.body.addEventListener('keyup', this.event);
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener('keyup', this.event);
   }
 
   open(rc) {
