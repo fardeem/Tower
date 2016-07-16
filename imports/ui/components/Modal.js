@@ -5,20 +5,24 @@ class Modal extends Component {
   constructor() {
     super();
 
-    this.state = {
-      open: false,
-    };
+    this.state = { open: false };
+    this.close = this.close.bind(this);
   }
 
   open(rc) {
     return this.setState({ open: true });
   }
 
+  close() {
+    return this.setState({ open: false });
+  }
+
   render() {
     return this.state.open ? (
       <div className="overlay">
         <div className="modal">
-          {this.props.children}
+          <button onClick={this.close} className="modal__close">&times;</button>
+          <div>{this.props.children}</div>
         </div>
       </div>
     ) : false;
