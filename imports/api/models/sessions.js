@@ -29,14 +29,18 @@ export const updateDay = new ValidatedMethod({
     day: { type: Number },
     startTime: { type: String },
   }).validator(),
-  run({ _id, day, startTime }) {
-    const { subjectId } = Sessions.findOne({ _id });
+  run({ _id, day: newDay, startTime }) {
+    const { subjectId, day } = Sessions.findOne({ _id });
     const { examtime } = Subjects.findOne({ _id: subjectId });
     const endTime = moment(startTime, 'HH:mm')
       .add(examtime, 'h')
       .format('HH:mm');
 
-    return Sessions.update({ _id }, { $set: { day, startTime, endTime } });
+    if (newDay === day) return false;
+    return Sessions.update(
+      { _id },
+      { $set: { day: newDay, startTime, endTime } }
+    );
   },
 });
 
